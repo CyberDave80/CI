@@ -95,7 +95,7 @@ jobs:
       # If any test fails ❌, the workflow fails (red X) and GitHub
       # notifies you so you can fix the problem.
       - name: 🧪 Step 4 - Run the tests
-        run: python -m pytest test_hello.py -v
+        run: python -m pytest test_hello.py -v --junitxml=test-results.xml
 
       # ----------------------------------------------------------
       # STEP 5: Upload test results as an artifact
