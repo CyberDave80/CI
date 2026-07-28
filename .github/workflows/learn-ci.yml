@@ -1,0 +1,98 @@
+# ============================================================
+# learn-ci.yml — Our first GitHub Actions workflow! 🤖
+# ============================================================
+#
+# WHAT IS THIS FILE?
+# This file tells GitHub's robot helper what to do every time
+# someone pushes code or opens a Pull Request.
+#
+# Think of it like a recipe card:
+#   📋 "When X happens, do steps 1, 2, 3..."
+#
+# ============================================================
+
+# Give our workflow a friendly name — you'll see this in the Actions tab!
+name: Learn CI - Run Tests 🧪
+
+# ============================================================
+# WHEN does the robot wake up and run?
+# ============================================================
+on:
+  # Run when someone pushes code to the main branch
+  push:
+    branches:
+      - main
+
+  # Also run when someone opens or updates a Pull Request
+  pull_request:
+    branches:
+      - main
+
+  # Allow running the workflow manually from the Actions tab
+  workflow_dispatch:
+
+# ============================================================
+# WHAT does the robot do? (called "jobs")
+# ============================================================
+jobs:
+
+  # This is our one job — we call it "test"
+  # A job is a group of steps that run on the same robot computer
+  test:
+
+    # Give this job a friendly name shown in the Actions tab
+    name: Run Python Tests 🐍
+
+    # 🔒 Permissions — what is the robot allowed to do?
+    # We only need to READ the repository contents, nothing else.
+    # Limiting permissions is a good security practice!
+    permissions:
+      contents: read
+
+    # Which type of computer should the robot use?
+    # "ubuntu-latest" means a Linux computer — it's free to use!
+    runs-on: ubuntu-latest
+
+    # ============================================================
+    # STEPS — the individual tasks the robot does, one by one
+    # ============================================================
+    steps:
+
+      # ----------------------------------------------------------
+      # STEP 1: Download our code
+      # ----------------------------------------------------------
+      # Before doing anything, the robot needs to get our code!
+      # "actions/checkout" is a ready-made helper that does this.
+      - name: 📥 Step 1 - Check out the code
+        uses: actions/checkout@v4
+        # After this step, all our files are on the robot's computer.
+
+      # ----------------------------------------------------------
+      # STEP 2: Install Python
+      # ----------------------------------------------------------
+      # The robot's computer needs Python to run our .py files.
+      # "actions/setup-python" installs a specific Python version for us.
+      - name: 🐍 Step 2 - Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"  # We want Python version 3.12
+
+      # ----------------------------------------------------------
+      # STEP 3: Install our testing tool (pytest)
+      # ----------------------------------------------------------
+      # pytest is the tool that reads our test_hello.py file
+      # and runs all the tests automatically.
+      - name: 📦 Step 3 - Install pytest (our testing tool)
+        run: pip install pytest
+        # "run" means: execute this terminal command on the robot
+
+      # ----------------------------------------------------------
+      # STEP 4: Run the tests!
+      # ----------------------------------------------------------
+      # Now the exciting part — run all our tests!
+      # -v means "verbose" — show us detailed output for each test.
+      # If all tests pass ✅, the workflow succeeds (green checkmark).
+      # If any test fails ❌, the workflow fails (red X) and GitHub
+      # notifies you so you can fix the problem.
+      - name: 🧪 Step 4 - Run the tests
+        run: python -m pytest test_hello.py -v
