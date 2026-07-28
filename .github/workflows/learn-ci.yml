@@ -96,3 +96,14 @@ jobs:
       # notifies you so you can fix the problem.
       - name: 🧪 Step 4 - Run the tests
         run: python -m pytest test_hello.py -v
+
+      # ----------------------------------------------------------
+      # STEP 5: Upload test results as an artifact
+      # ----------------------------------------------------------
+      # This saves the test report so we can download it later
+      # from the GitHub Actions run page.
+      - name: 📦 Step 5 - Upload test results artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-results
+          path: test-results.xml
