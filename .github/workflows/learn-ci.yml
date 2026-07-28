@@ -43,6 +43,12 @@ jobs:
     # Give this job a friendly name shown in the Actions tab
     name: Run Python Tests 🐍
 
+    # 🔒 Permissions — what is the robot allowed to do?
+    # We only need to READ the repository contents, nothing else.
+    # Limiting permissions is a good security practice!
+    permissions:
+      contents: read
+
     # Which type of computer should the robot use?
     # "ubuntu-latest" means a Linux computer — it's free to use!
     runs-on: ubuntu-latest
