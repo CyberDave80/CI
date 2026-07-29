@@ -80,7 +80,7 @@ jobs:
 
 
       # ------------------------------------------------------
-      # STEP 3: Install project dependencies
+      # STEP 3: Install project dependencies. -m (Python finds the pip module that belongs to that exact Python interpreter and runs it.)
       # ------------------------------------------------------
 
       - name: 📦 Step 3 - Install dependencies
@@ -104,7 +104,7 @@ jobs:
 
 
       # ------------------------------------------------------
-      # STEP 5: Display test results in GitHub Actions
+      # STEP 5: Display test results in GitHub Actions. If gives it conditions based on last step
       # ------------------------------------------------------
 
       - name: 📊 Step 5 - Publish Test Summary
